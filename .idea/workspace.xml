@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="390ca80e-6e37-480a-9af3-ceae5beed941" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/app/auth/dto/auth.dto.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/app/auth/utils/hash.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/app/auth/utils/token.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/app/message/dto/message.dto.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/app/message/error.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/auth/guard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/cache/init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/cache/with.cache.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/config/env.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/correlation/correlation.id.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/email/init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/error/error.handler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/error/error.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/idImbotency/idImbotency.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/utils/google.auth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/lib/validation/validation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/pkg/cache/redis.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/pkg/email/mailjet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/pkg/logger/logger.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/route.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ngl--app/src/server.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/db-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/requirments.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/auth/controller/auth.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/auth/dto/dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/auth/enum/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/auth/error.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/auth/repository/auth.repository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/auth/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/auth/service/auth.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/auth/utils.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/comment/controller/comment.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/comment/repository/comment.repository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/comment/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/comment/service/comment.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/post/controller/post.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/post/model/post.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/post/repository/post.repository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/post/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/post/service/post.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/user/controller/user.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/user/error.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/user/interface/user.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/user/model/user.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/user/repository/user.repository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/user/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/user/service/user.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/auth/authGuard.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/cache/init.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/cache/withCache.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/db/connection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/email/init.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/error/error.handler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/error/error.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/interface/jwt.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/interface/request.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/interface/user.payLoad.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/utils/google.auth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/utils/otp.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pkg/cache/cache.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pkg/cache/redis.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pkg/email/mail.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pkg/email/mailjet.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pkg/email/nodemailer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pkg/utils/time.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teest.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../typeScript/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../async.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../big.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../data.txt.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mariam mohamed - c48 8-12 - 01008974258 assignment2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3MH0T0v9xyY6gvSqI5lReCZQpGU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "D:/Route_Node_js/social-app/src/app/auth",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "D:\\WebStorm 2026.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Route_Node_js\social-app\src\app\auth" />
+      <recent name="D:\Route_Node_js\social-app\src\app\user" />
+      <recent name="D:\Route_Node_js\social-app\src\lib" />
+      <recent name="D:\Route_Node_js\social-app\src" />
+      <recent name="D:\Route_Node_js\social-app\src\app\post" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Route_Node_js\social-app\src\lib\interface" />
+      <recent name="D:\Route_Node_js\social-app\src" />
+      <recent name="D:\Route_Node_js\social-app" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.26222.58" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="390ca80e-6e37-480a-9af3-ceae5beed941" name="Changes" comment="" />
+      <created>1794992189826</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1794992189826</updated>
+      <workItem from="1794992190925" duration="39811000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/lib/config/env.js" />
+      </list>
+    </option>
+  </component>
+</project>
