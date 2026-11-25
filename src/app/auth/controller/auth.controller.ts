@@ -1,14 +1,17 @@
+﻿
+import { inject, injectable } from "tsyringe";
 import type { NextFunction, Request, Response } from "express";
 
-import authService, { AuthService } from "../service/auth.service";
+import { TOKENS } from "../../../lib/di/tokens";
+import { AuthService } from "../service/auth.service";
 import { setCookies } from "../utils";
 
-class AuthController {
-    private authService: AuthService;
-
-    constructor() {
-        this.authService = authService;
-    }
+@injectable()
+export class AuthController {
+    constructor(
+        @inject(TOKENS.AuthService)
+        private readonly authService: AuthService
+    ) {}
 
     // Register
     register = async (
@@ -111,7 +114,7 @@ class AuthController {
         }
     };
 
-    // Activate 2-step: Verify OTP and update database
+    // Activate 2-step: Verify OTP
     activateTwoStep = async (
         req: Request,
         res: Response,
@@ -244,5 +247,3 @@ class AuthController {
         }
     };
 }
-
-export default new AuthController();

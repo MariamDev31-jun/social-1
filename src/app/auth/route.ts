@@ -1,8 +1,15 @@
-
+﻿
 import { Router } from "express";
-import authController from "./controller/auth.controller";
+import { container } from "tsyringe";
+
+import { TOKENS } from "../../lib/di/tokens";
+import { AuthController } from "./controller/auth.controller";
 
 export const authRouter = Router();
+
+const authController = container.resolve<AuthController>(
+    TOKENS.AuthController
+);
 
 authRouter.post("/register", authController.register);
 authRouter.post("/verify-account", authController.verifyAccount);

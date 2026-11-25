@@ -1,10 +1,16 @@
-import { cacheProvider } from "../../../lib/cache/init";
+﻿
+import { inject, injectable } from "tsyringe";
+import type { ICacheProvider } from "../../../pkg/cache/cache.interface";
+import type { MailProvider } from "../../../pkg/email/mail.interface";
+
+import { TOKENS } from "../../../lib/di/tokens";
 import { env } from "../../../lib/config/env";
-import { mailjetProvider } from "../../../lib/email/init";
 import { AppError } from "../../../lib/error/error";
+
 import { verifyGoogleToken } from "../../../lib/utils/google.auth";
 import { generateOTPCode } from "../../../lib/utils/otp";
 import type { TUserPayload } from "../../../lib/interface/user.payLoad";
+
 import { toSeconds } from "../../../pkg/utils/time";
 
 import {
@@ -14,9 +20,7 @@ import {
     userNotVerified
 } from "../../user/error";
 
-import userRepository, {
-    UserRepository
-} from "../../user/repository/user.repository";
+import { UserRepository } from "../../user/repository/user.repository";
 
 import {
     invalidCode,
@@ -32,7 +36,7 @@ import {
     toSafeUser
 } from "../utils";
 
-import {
+import type {
     LoginDto,
     RegisterDto,
     SendOtpDto,
@@ -52,23 +56,31 @@ export interface AuthTokens {
     refreshToken: string;
 }
 
+@injectable()
 export class AuthService {
     private readonly twoStepVerificationKey = "2-step-verification:";
     private readonly sendOtpKey = "otp:";
     private readonly refreshTokenKey = "refresh-token:";
 
-    private readonly userRepository: UserRepository;
+    constructor(
+        @inject(TOKENS.UserRepository)
+        private readonly userRepository: UserRepository,
 
-    constructor() {
-        this.userRepository = userRepository;
-    }
+        @inject(TOKENS.CacheProvider)
+        private readonly cacheProvider: ICacheProvider,
+
+        @inject(TOKENS.MailjetProvider)
+        private readonly mailjetProvider: MailProvider
+    ) {}
 
     // Create and store a new session
-    private async createSession(payload: TUserPayload): Promise<AuthTokens> {
+    private async createSession(
+        payload: TUserPayload
+    ): Promise<AuthTokens> {
         const accessToken = generateAccessToken(payload);
         const refreshToken = generateRefreshToken(payload);
 
-        await cacheProvider.set(
+        await this.cacheProvider.set(
             `${this.refreshTokenKey}${payload.id}`,
             refreshToken,
             toSeconds(7, "days")
@@ -102,13 +114,13 @@ export class AuthService {
 
         const otpKey = `${this.sendOtpKey}${createdUser._id.toString()}`;
 
-        await cacheProvider.set(
+        await this.cacheProvider.set(
             otpKey,
             code,
             toSeconds(3, "minutes")
         );
 
-        await mailjetProvider.send(
+        await this.mailjetProvider.send(
             createdUser.email,
             "Verification Code",
             `<h1>Your verification code is ${code}</h1>`
@@ -133,7 +145,7 @@ export class AuthService {
 
         const otpKey = `${this.sendOtpKey}${user._id.toString()}`;
 
-        const cacheCode = await cacheProvider.get(otpKey);
+        const cacheCode = await this.cacheProvider.get(otpKey);
 
         if (!cacheCode) {
             throw otpExpired;
@@ -149,7 +161,7 @@ export class AuthService {
             { new: true }
         );
 
-        await cacheProvider.del(otpKey);
+        await this.cacheProvider.del(otpKey);
 
         if (!updatedUser) {
             throw userNotExist;
@@ -162,13 +174,13 @@ export class AuthService {
     async enable2StepVerification(email: string): Promise<void> {
         const code = generateOTPCode();
 
-        await cacheProvider.set(
+        await this.cacheProvider.set(
             `${this.twoStepVerificationKey}${email}`,
             code,
             toSeconds(3, "minutes")
         );
 
-        await mailjetProvider.send(
+        await this.mailjetProvider.send(
             email,
             "2 Step Verification Code",
             `Your 2 step verification code is ${code}`
@@ -188,7 +200,7 @@ export class AuthService {
 
         const otpKey = `${this.twoStepVerificationKey}${email}`;
 
-        const cacheCode = await cacheProvider.get(otpKey);
+        const cacheCode = await this.cacheProvider.get(otpKey);
 
         if (!cacheCode) {
             throw otpExpired;
@@ -203,7 +215,7 @@ export class AuthService {
             { twoStepVerification: true }
         );
 
-        await cacheProvider.del(otpKey);
+        await this.cacheProvider.del(otpKey);
     }
 
     // Login
@@ -213,7 +225,7 @@ export class AuthService {
         const email = loginDto.email.toLowerCase();
         const loginKey = `${email}:login`;
 
-        const cachedAttempt = await cacheProvider.get(loginKey);
+        const cachedAttempt = await this.cacheProvider.get(loginKey);
 
         if (cachedAttempt === "0") {
             throw new AppError(
@@ -246,7 +258,7 @@ export class AuthService {
                 ? parseInt(cachedAttempt, 10)
                 : 5;
 
-            const ttlRemaining = await cacheProvider.ttl(loginKey);
+            const ttlRemaining = await this.cacheProvider.ttl(loginKey);
 
             const ttl = ttlRemaining > 0
                 ? ttlRemaining
@@ -254,7 +266,7 @@ export class AuthService {
 
             const remainingAttempts = attempts - 1;
 
-            await cacheProvider.set(
+            await this.cacheProvider.set(
                 loginKey,
                 String(remainingAttempts),
                 ttl
@@ -270,18 +282,18 @@ export class AuthService {
             throw invalidPassword;
         }
 
-        await cacheProvider.del(loginKey);
+        await this.cacheProvider.del(loginKey);
 
         if (user.twoStepVerification === true) {
             const code = generateOTPCode();
 
-            await cacheProvider.set(
+            await this.cacheProvider.set(
                 `${this.twoStepVerificationKey}${email}`,
                 code,
                 toSeconds(1, "minutes")
             );
 
-            await mailjetProvider.send(
+            await this.mailjetProvider.send(
                 email,
                 "2 Step Verification Code",
                 `<h3>Your code is ${code}</h3>`
@@ -313,7 +325,7 @@ export class AuthService {
 
         const otpKey = `${this.twoStepVerificationKey}${email}`;
 
-        const cacheCode = await cacheProvider.get(otpKey);
+        const cacheCode = await this.cacheProvider.get(otpKey);
 
         if (!cacheCode) {
             throw otpExpired;
@@ -329,7 +341,7 @@ export class AuthService {
             email: user.email
         };
 
-        await cacheProvider.del(otpKey);
+        await this.cacheProvider.del(otpKey);
 
         return this.createSession(payload);
     }
@@ -348,13 +360,13 @@ export class AuthService {
 
         const otpKey = `${this.sendOtpKey}${user._id.toString()}`;
 
-        await cacheProvider.set(
+        await this.cacheProvider.set(
             otpKey,
             code,
             toSeconds(3, "minutes")
         );
 
-        await mailjetProvider.send(
+        await this.mailjetProvider.send(
             email,
             "New OTP",
             `<p>Your new OTP is ${code}</p>`
@@ -373,7 +385,7 @@ export class AuthService {
 
         const otpKey = `${this.sendOtpKey}${user._id.toString()}`;
 
-        const otp = await cacheProvider.get(otpKey);
+        const otp = await this.cacheProvider.get(otpKey);
 
         if (!otp) {
             throw otpExpired;
@@ -390,10 +402,10 @@ export class AuthService {
             { password: hashedPassword }
         );
 
-        await cacheProvider.del(otpKey);
+        await this.cacheProvider.del(otpKey);
 
         // Revoke existing refresh token after password reset
-        await cacheProvider.del(
+        await this.cacheProvider.del(
             `${this.refreshTokenKey}${user._id.toString()}`
         );
     }
@@ -473,9 +485,14 @@ export class AuthService {
             );
         }
 
-        const payload: TUserPayload = { ...decoded, id, userName, email };
+        const payload: TUserPayload = {
+            ...decoded,
+            id,
+            userName,
+            email
+        };
 
-        const storedToken = await cacheProvider.get(
+        const storedToken = await this.cacheProvider.get(
             `${this.refreshTokenKey}${payload.id}`
         );
 
@@ -489,7 +506,7 @@ export class AuthService {
         const user = await this.userRepository.findById(payload.id);
 
         if (!user) {
-            await cacheProvider.del(
+            await this.cacheProvider.del(
                 `${this.refreshTokenKey}${payload.id}`
             );
 
@@ -518,7 +535,7 @@ export class AuthService {
             ) as jwt.JwtPayload;
 
             if (decoded && decoded.id) {
-                await cacheProvider.del(
+                await this.cacheProvider.del(
                     `${this.refreshTokenKey}${decoded.id}`
                 );
             }
@@ -527,5 +544,3 @@ export class AuthService {
         }
     }
 }
-
-export default new AuthService();
